@@ -65,6 +65,9 @@ export function CommandInput({ currentPosition, setCommands, setCurrentPosition,
 
   // decrease facing index and wrap around if below 0
   function left() {
+    // no place() executed so cannot rotate
+    if (!currentPosition) return false;
+
     const currentIndex = currentPosition.facing;
     setCurrentPosition((old) => ({ x: old.x, y: old.y, facing: currentIndex - 1 < 0 ? 3 : currentIndex - 1 }));
     setCurrentRotation((old) => old - 90);
@@ -73,6 +76,9 @@ export function CommandInput({ currentPosition, setCommands, setCurrentPosition,
 
   // increase facing index and wrap around if above 0
   function right() {
+    // no place() executed so cannot rotate
+    if (!currentPosition) return false;
+
     const currentIndex = currentPosition.facing;
     setCurrentPosition((old) => ({ x: old.x, y: old.y, facing: currentIndex + 1 > 3 ? 0 : currentIndex + 1 }));
     setCurrentRotation((old) => old + 90);
